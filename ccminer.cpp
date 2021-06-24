@@ -339,7 +339,7 @@ Options:\n\
       --submit-stale    ignore stale jobs checks, may create more rejected shares\n\
   -n, --ndevs           list cuda devices\n\
   -N, --statsavg        number of samples used to compute hashrate (default: 30)\n\
-      --no-gbt          disable getblocktemplate support (height check in solo)\n\
+      --no-gbt          disable getpoablocktemplate support (height check in solo)\n\
       --no-longpoll     disable X-Long-Polling support\n\
       --no-stratum      disable X-Stratum support\n\
       --no-extranonce   disable extranonce subscribe on stratum\n\
@@ -1178,7 +1178,7 @@ static bool gbt_work_decode(const json_t *val, struct work *work)
 
 #define GBT_CAPABILITIES "[\"coinbasetxn\", \"coinbasevalue\", \"longpoll\", \"workid\"]"
 static const char *gbt_req =
-	"{\"method\": \"getblocktemplate\", \"params\": [{"
+	"{\"method\": \"getpoablocktemplate\", \"params\": [{"
 	//	"\"capabilities\": " GBT_CAPABILITIES ""
 	"}], \"id\":9}\r\n";
 
@@ -1192,7 +1192,7 @@ static bool get_blocktemplate(CURL *curl, struct work *work)
 	json_t *val = json_rpc_call_pool(curl, pool, gbt_req, false, false, &curl_err);
 
 	if (!val && curl_err == -1) {
-		// when getblocktemplate is not supported, disable it
+		// when getpoablocktemplate is not supported, disable it
 		allow_gbt = false;
 		if (!opt_quiet) {
 				applog(LOG_BLUE, "gbt not supported, block height notices disabled");
