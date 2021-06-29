@@ -1110,7 +1110,7 @@ static bool submit_upstream_work(CURL *curl, struct work *work)
 
 		/* build JSON-RPC request */
 		sprintf(s,
-			"{\"method\": \"getwork\", \"params\": [\"%s\"], \"id\":10}\r\n",
+			"{\"method\": \"getpoablocktemplate\", \"params\": [\"%s\"], \"id\":10}\r\n",
 			str);
 
 		/* issue JSON-RPC request */
@@ -1260,7 +1260,7 @@ static bool get_mininginfo(CURL *curl, struct work *work)
 }
 
 static const char *json_rpc_getwork =
-	"{\"method\":\"getwork\",\"params\":[],\"id\":0}\r\n";
+	"{\"method\":\"getpoablocktemplate\",\"params\":[],\"id\":0}\r\n";
 
 static bool get_upstream_work(CURL *curl, struct work *work)
 {
